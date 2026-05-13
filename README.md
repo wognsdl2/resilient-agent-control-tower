@@ -27,6 +27,10 @@ The TrueFoundry track asks how an agent behaves when MCP or LLM infrastructure s
 
 ## Run Locally
 
+Live demo:
+
+https://wognsdl2.github.io/resilient-agent-control-tower/
+
 ```bash
 python -m http.server 8092
 ```
