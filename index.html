@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Resilient Agent Control Tower</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">TrueFoundry Resilient Agents</p>
+        <h1>Resilient Agent Control Tower</h1>
+      </div>
+      <div class="status-strip" aria-label="dependency status">
+        <span id="llm-status" class="status-pill good">LLM primary</span>
+        <span id="mcp-status" class="status-pill good">MCP tools</span>
+        <span id="ux-status" class="status-pill good">User UX</span>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="control-panel" aria-label="scenario controls">
+        <div class="panel-heading">
+          <h2>Incident Lab</h2>
+          <button id="run-button" type="button">Run Agent</button>
+        </div>
+
+        <label for="scenario">Failure scenario</label>
+        <select id="scenario">
+          <option value="healthy">Healthy stack</option>
+          <option value="llm_timeout">LLM timeout</option>
+          <option value="mcp_outage">MCP server outage</option>
+          <option value="bad_tool_payload">Malformed tool payload</option>
+          <option value="rate_limit">Rate limit pressure</option>
+          <option value="cascade">Cascading failure</option>
+        </select>
+
+        <label for="task">User task</label>
+        <textarea id="task" rows="5">Analyze customer churn risk, query the CRM MCP server for account context, and draft a calm next-step recommendation for the support lead.</textarea>
+
+        <div class="toggles" aria-label="resilience policies">
+          <label><input type="checkbox" id="retry" checked /> Retry with jitter</label>
+          <label><input type="checkbox" id="fallback" checked /> Provider fallback</label>
+          <label><input type="checkbox" id="circuit" checked /> Circuit breaker</label>
+          <label><input type="checkbox" id="cache" checked /> Last-known-good cache</label>
+        </div>
+
+        <button id="export-button" type="button" class="secondary">Export Incident Report</button>
+      </section>
+
+      <section class="dashboard" aria-label="resilience dashboard">
+        <div class="metric-row">
+          <article class="metric">
+            <span>Recovery path</span>
+            <strong id="recovery-path">Primary route</strong>
+          </article>
+          <article class="metric">
+            <span>Estimated user delay</span>
+            <strong id="delay">0.8s</strong>
+          </article>
+          <article class="metric">
+            <span>Confidence</span>
+            <strong id="confidence">96%</strong>
+          </article>
+          <article class="metric">
+            <span>Open circuits</span>
+            <strong id="circuits">0</strong>
+          </article>
+        </div>
+
+        <div class="main-grid">
+          <article class="incident-map">
+            <div class="panel-heading">
+              <h2>Runtime Topology</h2>
+              <span id="scenario-label">Healthy stack</span>
+            </div>
+            <canvas id="topology" width="920" height="460" aria-label="agent infrastructure topology"></canvas>
+          </article>
+
+          <article class="answer-panel">
+            <h2>User-Facing Answer</h2>
+            <p id="user-answer">Run the agent to see how the response changes when infrastructure fails.</p>
+            <div id="user-note" class="user-note">No incident yet.</div>
+          </article>
+        </div>
+
+        <article class="timeline-panel">
+          <div class="panel-heading">
+            <h2>Incident Timeline</h2>
+            <span id="policy-summary">4 policies active</span>
+          </div>
+          <ol id="timeline"></ol>
+        </article>
+      </section>
+    </main>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>

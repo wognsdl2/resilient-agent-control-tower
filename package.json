@@ -1,0 +1,18 @@
+{
+  "name": "resilient-agent-control-tower",
+  "version": "1.0.0",
+  "description": "Hackathon demo for resilient AI agent UX during LLM and MCP outages.",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/router.test.mjs",
+    "serve": "python -m http.server 8092"
+  },
+  "keywords": [
+    "ai-agents",
+    "mcp",
+    "resilience",
+    "truefoundry",
+    "hackathon"
+  ],
+  "license": "MIT"
+}
